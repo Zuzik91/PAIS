@@ -8,46 +8,64 @@ using System.Threading.Tasks;
 
 namespace PAIS_CORE.Database
 {
-    public class Uzivatel_DB: IDb<Uzivatel>
+    public class Uzivatel_DB : IDb<Uzivatel>
     {
 
         private static Dictionary<int, Uzivatel> db = new Dictionary<int, Uzivatel>();
 
         private static int posledniId = 1;
 
-        //Vytvoří nového uživatele
-        //Do slovníku s názvem db přidá uživatele
-        //Dále definujeme uuživatelské ID jako poslední ID z důvodu unikátnosti ID (posledniId++)
+        /// <summary>
+        /// Vytvoří nového uživatele
+        /// Do slovníku s názvem db přidá uživatele
+        /// Dále definujeme uživatelské ID jako poslední ID z důvodu unikátnosti ID (posledniId++)
+        /// </summary>
+        /// <param name="uzivatel"></param>
         public void Vloz(Uzivatel uzivatel)
         {
-            //zkontrolovat zda už uživatel neexistuje
-            db.Add(posledniId, uzivatel);
-            uzivatel.Id = posledniId;
-            posledniId++;
+            if (uzivatel.Id != 0 && db.ContainsKey(uzivatel.Id))
+            {
+                Console.WriteLine($"Uživatel {uzivatel.Jmeno} {uzivatel.Prijmeni} již existuje");
+            }
+            else
+            {
+                uzivatel.Id = posledniId++;
+                db.Add(uzivatel.Id, uzivatel);
+            }
         }
 
-        //smaž uživatele dle jeho ID
         public void Smaz(Uzivatel uzivatel)
         {
-            // podmínka if - pokud existuje id 
             Smaz(uzivatel.Id);
         }
 
-        //smaže pouze konkrétní ID
         public void Smaz(int id)
         {
-            // podmínka if - pokud existuje id 
-            db.Remove(id);
+            if (db.ContainsKey(id))
+            {
+                Console.WriteLine($"Uživatel s id {id} není v databázi.");
+            }
+            else
+            {
+                db.Remove(id);
+            }
         }
 
-        //Upraví uživatele na základě jeho ID
+        /// <summary>
+        /// Upraví uživatele na základě jeho ID
+        /// </summary>
+        /// <param name="uzivatel"></param>
         public void Aktualizuj(Uzivatel uzivatel)
         {
             int id = uzivatel.Id; //identifikátor, nebo-li klíč, podle kterého poté pracuje ve slovníku
             db[id] = uzivatel; //konkrétní záznam v db s klíčem id je nahrazen novým objektem uzivatel
         }
 
-        //tato metoda vrací uživatele dle jeho id
+        /// <summary>
+        /// Metoda vrací uživatele dle jeho id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Uzivatel Ziskej(int id)
         {
             //Pomocí klíče id se z db načte odpovídající objekt uživatele a uloží se do proměnné uzivatel
@@ -55,7 +73,10 @@ namespace PAIS_CORE.Database
             return uzivatel;
         }
 
-        //tato metoda vrací nový seznam - list
+        /// <summary>
+        /// Metoda vrací nový seznam - list
+        /// </summary>
+        /// <returns></returns>
         public List<Uzivatel> ZiskejVsechny()
         {
             List<Uzivatel> vysledek = new List<Uzivatel>();

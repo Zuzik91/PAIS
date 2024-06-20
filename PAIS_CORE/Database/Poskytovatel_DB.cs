@@ -15,8 +15,15 @@ namespace PAIS_CORE.Database
 
         public void Vloz(Poskytovatel poskytovatel)
         {
-            db.Add(poskytovatel.Id,poskytovatel);
-            poskytovatel.Id = posledniId++;
+            if (poskytovatel.Id != 0 && db.ContainsKey(poskytovatel.Id))
+            {
+                Console.WriteLine($"Poskytovatel {poskytovatel.Typ} již existuje");
+            }
+            else
+            {
+                poskytovatel.Id = posledniId++;
+                db.Add(poskytovatel.Id, poskytovatel);
+            }
         }
 
         public void Smaz(Poskytovatel poskytovatel)
@@ -26,7 +33,14 @@ namespace PAIS_CORE.Database
 
         public void Smaz(int id)
         {
-            db.Remove(id);
+            if (db.ContainsKey(id))
+            {
+                Console.WriteLine($"Poskytovatel s id {id} není v databázi.");
+            }
+            else
+            {
+                db.Remove(id);
+            }
         }
         public void Aktualizuj(Poskytovatel poskytovatel)
         {

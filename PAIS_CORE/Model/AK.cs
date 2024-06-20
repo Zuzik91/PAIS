@@ -52,5 +52,4 @@ namespace PAIS_CORE.Model
             NazevServeru = nazevServeru;
         }
     }
-    
 }

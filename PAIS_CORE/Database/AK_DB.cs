@@ -9,14 +9,20 @@ namespace PAIS_CORE.Database
 {
     public class AK_DB : IDb<AK>
     {
-        //databáze Poskytovatele
         public static Dictionary<int, AK> db = new Dictionary<int, AK>();
         public static int posledniId = 1;
 
         public void Vloz(AK ak)
         {
-            db.Add(ak.Id,ak);
-            ak.Id = posledniId++;
+            if (ak.Id != 0 && db.ContainsKey(ak.Id))
+            {
+                Console.WriteLine($"Advokátní kancelář {ak.NazevAk} již existuje");
+            }
+            else
+            {
+                ak.Id = posledniId++;
+                db.Add(ak.Id, ak);
+            }
         }
 
         public void Smaz(AK ak)
@@ -26,7 +32,14 @@ namespace PAIS_CORE.Database
 
         public void Smaz(int id)
         {
-            db.Remove(id);
+            if (db.ContainsKey(id))
+            {
+                Console.WriteLine($"Advokátní kancelář s id {id} není v databázi.");
+            }
+            else
+            {
+                db.Remove(id);
+            }
         }
 
         public void Aktualizuj(AK ak)
@@ -50,6 +63,7 @@ namespace PAIS_CORE.Database
             }
             return vysledek;
         }
+
         public int PocetZaznamu()
         {
             return db.Count;

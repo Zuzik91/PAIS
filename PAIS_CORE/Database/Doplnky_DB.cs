@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,8 +16,15 @@ namespace PAIS_CORE.Database
 
         public void Vloz(Doplnky doplnky)
         {
-            db.Add(doplnky.Id, doplnky);
-            doplnky.Id = posledniId++;
+            if (doplnky.Id != 0 && db.ContainsKey(doplnky.Id))
+            {
+                Console.WriteLine("Doplněk již existuje");
+            }
+            else
+            {
+                doplnky.Id = posledniId++;
+                db.Add(doplnky.Id, doplnky);
+            }
         }
 
         public void Smaz(Doplnky doplnky)

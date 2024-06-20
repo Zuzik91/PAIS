@@ -15,8 +15,15 @@ namespace PAIS_CORE.Database
 
         public void Vloz(Kontakt kontakt)
         {
-            db.Add(kontakt.Id, kontakt);
-            kontakt.Id = posledniId++;
+            if (kontakt.Id != 0 && db.ContainsKey(kontakt.Id))
+            {
+                Console.WriteLine($"Kontakt {kontakt.Jmeno} {kontakt.Prijmeni} již existuje");
+            }
+            else
+            {
+                kontakt.Id = posledniId++;
+                db.Add( kontakt.Id, kontakt);
+            }
         }
 
         public void Smaz(Kontakt kontakt)
@@ -26,7 +33,14 @@ namespace PAIS_CORE.Database
 
         public void Smaz(int id)
         {
-            db.Remove(id);
+            if (db.ContainsKey(id))
+            {
+                Console.WriteLine($"Kontakt s id {id} není v databázi.");
+            }
+            else
+            {
+                db.Remove(id);
+            }
         }
 
         public void Aktualizuj(Kontakt kontakt)

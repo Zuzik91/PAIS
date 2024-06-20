@@ -11,7 +11,7 @@ namespace PAIS_CORE.Model
         //třída Poskytovatel, obsahuje tyto vlastnosti:
         public int Id { get; set; }
         public TypPoskytovatele Typ { get; set; } // pomocí ENUM jsme vytvořili výběr ze 2 poskytivatelů
-        //pomocí podmínky se bude určivat jaké vlastnosti daný Typ má
+        //pomocí podmínky se bude určovat jaké vlastnosti daný Typ má
         public string ApiKeyPoskytovatele { get; set; }
         public string Url { get; set; }
 
@@ -34,5 +34,4 @@ namespace PAIS_CORE.Model
     {
         OpenAI, Azure
     }
-
 }
