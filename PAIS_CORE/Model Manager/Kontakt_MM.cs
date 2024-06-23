@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PAIS_CORE.Database
 {
-    public class Kontakt_DB : IDb<Kontakt>
+    public class Kontakt_MM : IMm<Kontakt>
     {
         private static Dictionary<int, Kontakt> db = new Dictionary<int, Kontakt>();
 
@@ -32,7 +32,7 @@ namespace PAIS_CORE.Database
         }
 
         public void Smaz(int id)
-        {
+        {        
             if (db.ContainsKey(id))
             {
                 Console.WriteLine($"Kontakt s id {id} není v databázi.");
@@ -40,6 +40,7 @@ namespace PAIS_CORE.Database
             else
             {
                 db.Remove(id);
+                Console.WriteLine($"Kontakt s id {id} byl smazán.");
             }
         }
 
@@ -70,5 +71,27 @@ namespace PAIS_CORE.Database
         {
             return db.Count;
         }
+
+        static void PridatKontakt(Kontakt_MM kontaktDb)
+        {
+            Console.WriteLine("Zadejte jméno:");
+            string jmeno = Console.ReadLine();
+
+            Console.WriteLine("Zadejte příjmení:");
+            string prijmeni = Console.ReadLine();
+
+            Console.WriteLine("Zadejte telefonní číslo:");
+            string telefonniCislo = (Console.ReadLine());
+
+            Console.WriteLine("Zadejte email:");
+            string email = Console.ReadLine();
+
+            var kontakt = new Kontakt(jmeno, prijmeni, telefonniCislo, email);
+            kontaktDb.Vloz(kontakt);
+
+            Console.WriteLine($"Přidali jste nový kontakt: {kontakt.ToString()}");
+        }
+
+        
     }
 }

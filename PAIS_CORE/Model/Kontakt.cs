@@ -12,11 +12,12 @@ namespace PAIS_CORE.Model
         public int Id { get; set; }
         public string Jmeno { get; set; }
         public string Prijmeni { get; set; }
-        public int TelefonniCislo { get; set; }
+
+        public string TelefonniCislo;
         public string Mail { get; set; }
         public List<Pravo> Prava { get; set; } = new List<Pravo>();
 
-        public Kontakt(int id, string jmeno, string prijmeni, int telefonniCislo, string mail)
+        public Kontakt(int id, string jmeno, string prijmeni, string telefonniCislo, string mail)
         {
             Id = id;
             Jmeno = jmeno;
@@ -25,7 +26,7 @@ namespace PAIS_CORE.Model
             Mail = mail;
         }
 
-        public Kontakt(string jmeno, string prijmeni, int telefonniCislo, string mail)
+        public Kontakt(string jmeno, string prijmeni, string telefonniCislo, string mail)
         {
             Jmeno = jmeno;
             Prijmeni = prijmeni;
@@ -75,6 +76,40 @@ namespace PAIS_CORE.Model
             public string Nazev { get; set; }
             public bool MaPravo { get; set; }
         }
+        public override string ToString()
+        {
+            return $"{Id} - {Jmeno} {Prijmeni}: {TelefonniCislo}, {Mail}";
+        }
 
+        public string SpravnostTelefonnihoCisla
+        {
+            get => TelefonniCislo;
+            set
+            {
+                if (!IsValidTelefonniCislo(value))
+                    {
+                    throw new ArgumentException("Telefonní číslo musí obsahovat pouze čísla a mít délku 9 až 15 čísel!");
+                    }
+                TelefonniCislo = value;
+            }
+        }
+
+        private bool IsValidTelefonniCislo(string telefonniCislo)
+        {
+            if (string.IsNullOrWhiteSpace(telefonniCislo) || telefonniCislo.Length < 9 || telefonniCislo.Length > 15)
+            {
+                return false;
+            }
+
+            foreach (char t in telefonniCislo)
+            {
+                if (!char.IsDigit(t))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

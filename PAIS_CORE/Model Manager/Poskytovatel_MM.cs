@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PAIS_CORE.Database
 {
-    public class Poskytovatel_DB : IDb<Poskytovatel>
+    public class Poskytovatel_MM : IMm<Poskytovatel>
     {
         private static Dictionary<int, Poskytovatel> db = new Dictionary<int, Poskytovatel>();
 

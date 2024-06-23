@@ -12,12 +12,12 @@ namespace PAIS_CORE.Model
         //navíc má vlastnost ApiTokenUzivatele
         public string ApiTokenUzivatele { get; set; }
 
-        public Uzivatel(int id, string jmeno, string prijmeni, int telefonniCislo, string mail, string apiTokenUzivatele) : base(id, jmeno, prijmeni, telefonniCislo, mail)
+        public Uzivatel(int id, string jmeno, string prijmeni, string telefonniCislo, string mail, string apiTokenUzivatele) : base(id, jmeno, prijmeni, telefonniCislo, mail)
         {
             ApiTokenUzivatele = apiTokenUzivatele;
         }
 
-        public Uzivatel(string jmeno, string prijmeni, int telefonniCislo, string mail, string apiTokenUzivatele) : base(jmeno, prijmeni, telefonniCislo, mail)
+        public Uzivatel(string jmeno, string prijmeni, string telefonniCislo, string mail, string apiTokenUzivatele) : base(jmeno, prijmeni, telefonniCislo, mail)
         {
             ApiTokenUzivatele = apiTokenUzivatele;
         }

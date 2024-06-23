@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PAIS_CORE.Database
 {
-    public class Uzivatel_DB : IDb<Uzivatel>
+    public class Uzivatel_MM : IMm<Uzivatel>
     {
 
         private static Dictionary<int, Uzivatel> db = new Dictionary<int, Uzivatel>();

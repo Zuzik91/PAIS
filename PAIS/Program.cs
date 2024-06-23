@@ -7,20 +7,28 @@ namespace PAIS
     {
         static void Main(string[] args)
         {
-            var kontaktDb = new Kontakt_DB();
-            var uzivatelDb = new Uzivatel_DB();
-            var akDb = new AK_DB();
-            var poskytovatelDb = new Poskytovatel_DB();
-            var doplnkyDb = new Doplnky_DB();
+            var kontaktDb = new Kontakt_MM();
+            var uzivatelDb = new Uzivatel_MM();
+            var akDb = new AK_MM();
+            var poskytovatelDb = new Poskytovatel_MM();
+            var doplnkyDb = new Doplnky_MM();
 
             VytvorKontakty(kontaktDb);
             VytvorUzivatele(uzivatelDb);
             VytvorPoskytovatele(poskytovatelDb);
             VytvorDoplnky(doplnkyDb);
             VytvorAk(akDb, kontaktDb, uzivatelDb, poskytovatelDb, doplnkyDb);
-            
 
-            Console.WriteLine("Ahoj, jmenuji se P.Ai.S a jsem program spravující klienty využívající naše produkty Praetor AI.");
+            //PŘIDÁNÍ KONTAKTU - Nutnost kontroly telefonního čísla + ohlídání opakování kontaktu
+            PridatKontakt(kontaktDb);
+            Console.WriteLine();
+
+            //SMAZÁNÍ KONTAKTU - Výpis seznamu bez smazaného kontaktu
+            SmazatKontakt(kontaktDb);
+            Console.WriteLine();
+
+
+            /*Console.WriteLine("Ahoj, jmenuji se P.Ai.S a jsem program spravující klienty využívající naše produkty Praetor AI.");
             Console.WriteLine($"Našimi doplňky jsou: Word AI, Outlook AI, Integrace, Analýza a Anonymizace.");
             Console.WriteLine();
 
@@ -32,297 +40,168 @@ namespace PAIS
                 Console.WriteLine("Volba 4. Práce s poskytovateli");
                 Console.WriteLine("Volba 5. Práce s doplňky");
                 Console.WriteLine("Volba Q. Ukončit");
-                string volba = Console.ReadLine();
+                Console.WriteLine();
+                string volba = Console.ReadLine().ToUpper();
 
-                if (string.Equals(volba, "Q", StringComparison.OrdinalIgnoreCase))
+                switch (volba)
                 {
-                    break;
-                }
-                else if (volba == "1") //Práce s advokátní kanceláří
-                {
-                    Console.WriteLine("Volba 1. Počet advokátních kanceláří");
-                    Console.WriteLine("Volba 2. ");
-                    Console.WriteLine("Volba 3. ");
-                    Console.WriteLine("Volba 4. ");
-                    Console.WriteLine("Volba 5. ");
-                    Console.WriteLine("Volba 6. ");
-                    Console.WriteLine("Volba 7. ");
-                    Console.WriteLine("Volba Q. Ukončit");
-                    volba = Console.ReadLine();
-
-                    if (volba == "1") //Počet advokátních kanceláří
-                    {
-                        Console.WriteLine($"Počet advokátních kanceláří je {akDb.PocetZaznamu()}");
-                    }
-                    /*else if (volba == "2")
-                    {
-                        if ()
+                    case "1": //Práce s advokátní kanceláří
+                        while (true)
                         {
-                            Console.WriteLine($"2");
+                            Console.WriteLine("Volba 1.1 Přidání noví advokátní kanceláře.");
+                            Console.WriteLine("Volba 2. ");
+                            Console.WriteLine("Volba 3. ");
+                            Console.WriteLine("Volba 4. ");
+                            Console.WriteLine("Volba 5. ");
+                            Console.WriteLine("Volba 6. ");
+                            Console.WriteLine("Volba 7. Počet advokátních kanceláří");
+                            Console.WriteLine("Volba Q. Ukončit");
+
+                            switch (volba)
+                            {
+                                case "1":
+                                    Console.WriteLine($"Přidali jste nový záznam: ");
+                                    Console.WriteLine($"1");
+                                    return;
+
+                                case "2":
+                                    Console.WriteLine($"2");
+                                    Console.WriteLine();
+                                    return;
+
+                                case "3":
+                                    Console.WriteLine($"3");
+                                    Console.WriteLine();
+                                    return;
+
+                                case "4":
+                                    Console.WriteLine($"4");
+                                    Console.WriteLine();
+                                    return;
+
+                                case "5":
+                                    Console.WriteLine($"5");
+                                    Console.WriteLine();
+                                    return;
+
+                                case "6":
+                                    Console.WriteLine($"6");
+                                    Console.WriteLine();
+                                    return;
+
+                                case "7": //Počet advokátních kanceláří
+                                    Console.WriteLine($"Počet advokátních kanceláří je {akDb.PocetZaznamu()}");
+                                    Console.WriteLine();
+                                    return;
+
+                                case "Q":
+                                    Console.WriteLine();
+                                    break;
+
+                                default:
+                                    Console.WriteLine();
+                                    return;
+                            }
+
                         }
-                        else
+
+                    case "2": //Práce s uživateli
+                        break;
+
+                    case "3": //Práce s kontakty
+                        Console.WriteLine("Volba 3.1 Přidání nového kontaktu.");
+                        Console.WriteLine("Volba 3.2 ");
+                        Console.WriteLine("Volba 3.3 ");
+                        Console.WriteLine("Volba 3.4 ");
+                        Console.WriteLine("Volba 3.5 ");
+                        Console.WriteLine("Volba 3.6 ");
+                        Console.WriteLine("Volba 3.7 Počet kontaktů (celkem).");
+                        Console.WriteLine("Volba Q. Ukončit");
+
+                        switch (volba)
                         {
-                            Console.WriteLine("Zadali jste špatný údaj");
+                            case "3.1":
+                                PridatKontakt(kontaktDb);
+                                Console.WriteLine();
+                                return;
+
+                            case "3.2":
+                                Console.WriteLine($"2");
+                                Console.WriteLine("Zadali jste špatný údaj");
+                                return;
+
+                            case "3.3":
+                                Console.WriteLine($"3");
+                                Console.WriteLine();
+                                return;
+
+                            case "3.4":
+                                Console.WriteLine($"4");
+                                Console.WriteLine();
+                                return;
+
+                            case "3.5":
+                                Console.WriteLine($"5");
+                                Console.WriteLine();
+                                return;
+
+                            case "3.6":
+                                Console.WriteLine($"6");
+                                Console.WriteLine();
+                                return;
+
+                            case "3.7": //Počet kontaktů (celkem)
+                                Console.WriteLine($"Počet kontaktů celkem je {akDb.PocetZaznamu()}");
+                                Console.WriteLine();
+                                return;
+
+                            case "Q":
+                                Console.WriteLine();
+                                break;
                         }
-                    }*/
-                    else if (volba == "3")
-                    {
-                        Console.WriteLine($"3");
-                    }
-                    else if (volba == "4")
-                    {
-                        Console.WriteLine($"4");
-                    }
-                    else if (volba == "5")
-                    {
-                        Console.WriteLine($"5");
-                    }
-                    else if (volba == "6")
-                    {
-                        Console.WriteLine($"6");
-                    }
-                    else if (volba == "7")
-                    {
-                        Console.WriteLine($"7");
-                    }
-                    else if (string.Equals(volba, "Q", StringComparison.OrdinalIgnoreCase))
-                    {
                         break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Zadali jste špatný symbol");
-                    }
-                }
-                else if (volba == "2") //Práce s uživateli
-                {
-                    Console.WriteLine("Volba 1. Počet uživatelů v advokátní kanceláři");
-                    Console.WriteLine("Volba 2. ");
-                    Console.WriteLine("Volba 3. ");
-                    Console.WriteLine("Volba 4. ");
-                    Console.WriteLine("Volba 5. ");
-                    Console.WriteLine("Volba 6. ");
-                    Console.WriteLine("Volba 7. ");
-                    Console.WriteLine("Volba Q. Ukončit");
-                    volba = Console.ReadLine();
 
-                    if (volba == "1")
-                    {
-                        Console.WriteLine($"Počet uživatelů je {uzivatelDb.PocetZaznamu()}");
-                    }
-                    else if (volba == "2")
-                    {
-                        Console.WriteLine($"2");
-                    }
-                    else if (volba == "3")
-                    {
-                        Console.WriteLine($"3");
-                    }
-                    else if (volba == "4")
-                    {
-                        Console.WriteLine($"4");
-                    }
-                    else if (volba == "5")
-                    {
-                        Console.WriteLine($"5");
-                    }
-                    else if (volba == "6")
-                    {
-                        Console.WriteLine($"6");
-                    }
-                    else if (volba == "7")
-                    {
-                        Console.WriteLine($"7");
-                    }
-                    else if (string.Equals(volba, "Q", StringComparison.OrdinalIgnoreCase))
-                    {
+                    case "Q":
+                        Console.WriteLine();
                         break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Zadali jste špatný symbol");
-                    }
-                }
-                else if (volba == "3") //Práce s kontakty
-                {
-                    Console.WriteLine("Volba 1. Počet kontaktů");
-                    Console.WriteLine("Volba 2. ");
-                    Console.WriteLine("Volba 3. ");
-                    Console.WriteLine("Volba 4. ");
-                    Console.WriteLine("Volba 5. ");
-                    Console.WriteLine("Volba 6. ");
-                    Console.WriteLine("Volba 7. ");
-                    Console.WriteLine("Volba Q. Ukončit");
-                    volba = Console.ReadLine();
 
-                    if (volba == "1")
-                    {
-                        Console.WriteLine($"Počet kontaktů je {kontaktDb.PocetZaznamu()}");
-                    }
-                    else if (volba == "2")
-                    {
-                        Console.WriteLine($"2");
-                    }
-                    else if (volba == "3")
-                    {
-                        Console.WriteLine($"3");
-                    }
-                    else if (volba == "4")
-                    {
-                        Console.WriteLine($"4");
-                    }
-                    else if (volba == "5")
-                    {
-                        Console.WriteLine($"5");
-                    }
-                    else if (volba == "6")
-                    {
-                        Console.WriteLine($"6");
-                    }
-                    else if (volba == "7")
-                    {
-                        Console.WriteLine($"7");
-                    }
-                    else if (string.Equals(volba, "Q", StringComparison.OrdinalIgnoreCase))
-                    {
+                    default:
+                        Console.WriteLine("Zadali jste špatný symbol");
+                        Console.WriteLine();
                         break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Zadali jste špatný symbol");
-                    }
                 }
-                else if (volba == "4") //Práce s poskytovateli
-                {
-                    Console.WriteLine("Volba 1. Počet poskytovatelů");
-                    Console.WriteLine("Volba 2. ");
-                    Console.WriteLine("Volba 3. ");
-                    Console.WriteLine("Volba 4. ");
-                    Console.WriteLine("Volba 5. ");
-                    Console.WriteLine("Volba 6. ");
-                    Console.WriteLine("Volba 7. ");
-                    Console.WriteLine("Volba Q. Ukončit");
-                    volba = Console.ReadLine();
-
-                    if (volba == "1")
-                    {
-                        Console.WriteLine($"Počet poskytovatelů je {poskytovatelDb.PocetZaznamu()}");
-                    }
-                    else if (volba == "2")
-                    {
-                        Console.WriteLine($"2");
-                    }
-                    else if (volba == "3")
-                    {
-                        Console.WriteLine($"3");
-                    }
-                    else if (volba == "4")
-                    {
-                        Console.WriteLine($"4");
-                    }
-                    else if (volba == "5")
-                    {
-                        Console.WriteLine($"5");
-                    }
-                    else if (volba == "6")
-                    {
-                        Console.WriteLine($"6");
-                    }
-                    else if (volba == "7")
-                    {
-                        Console.WriteLine($"7");
-                    }
-                    else if (string.Equals(volba, "Q", StringComparison.OrdinalIgnoreCase))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Zadali jste špatný symbol");
-                    }
-
-                }
-                else if (volba == "5") //Práce s doplňky
-                {
-                    Console.WriteLine("Volba 1. Počet doplňků");
-                    Console.WriteLine("Volba 2. ");
-                    Console.WriteLine("Volba 3. ");
-                    Console.WriteLine("Volba 4. ");
-                    Console.WriteLine("Volba 5. ");
-                    Console.WriteLine("Volba 6. ");
-                    Console.WriteLine("Volba 7. ");
-                    Console.WriteLine("Volba Q. Ukončit");
-                    volba = Console.ReadLine();
-
-                    if (volba == "1")
-                    {
-                        Console.WriteLine($"Počet doplňků je {doplnkyDb.PocetZaznamu()}");
-                    }
-                    else if (volba == "2")
-                    {
-                        Console.WriteLine($"2");
-                    }
-                    else if (volba == "3")
-                    {
-                        Console.WriteLine($"3");
-                    }
-                    else if (volba == "4")
-                    {
-                        Console.WriteLine($"4");
-                    }
-                    else if (volba == "5")
-                    {
-                        Console.WriteLine($"5");
-                    }
-                    else if (volba == "6")
-                    {
-                        Console.WriteLine($"6");
-                    }
-                    else if (volba == "7")
-                    {
-                        Console.WriteLine($"7");
-                    }
-                    else if (string.Equals(volba, "Q", StringComparison.OrdinalIgnoreCase))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Zadali jste špatný symbol");
-                    }
-                }
-            }
+            }*/
         }
 
-        static void VytvorKontakty(Kontakt_DB kontaktDb)
+        static void VytvorKontakty(Kontakt_MM kontaktDb)
         {
-            var kontakt = new Kontakt("Pepa", "Šmíd", 123456789, "smid@smid.cz");
+            var kontakt = new Kontakt("Pepa", "Šmíd", "123456789", "smid@smid.cz");
             kontaktDb.Vloz(kontakt);
-            kontakt = new Kontakt("Alena", "Šilerová", 234567891, "shilerka@shilerka.com");
+            kontakt = new Kontakt("Alena", "Šilerová", "234567891", "shilerka@shilerka.com");
             kontaktDb.Vloz(kontakt);
-            kontakt = new Kontakt("Martin", "Novák", 345678912, "novak@novak.cz");
+            kontakt = new Kontakt("Martin", "Novák", "345678912", "novak@novak.cz");
             kontaktDb.Vloz(kontakt);
-            kontakt = new Kontakt("Zuzana", "Čermochová", 456789123, "cermochova@cermochova.com");
+            kontakt = new Kontakt("Zuzana", "Čermochová", "456789123", "cermochova@cermochova.com");
             kontaktDb.Vloz(kontakt);
-            kontakt = new Kontakt("Ondřej", "Huml", 567891234, "huml@huml.cz");
+            kontakt = new Kontakt("Ondřej", "Huml", "567891234", "huml@huml.cz");
             kontaktDb.Vloz(kontakt);
         }
 
-        static void VytvorUzivatele(Uzivatel_DB uzivatelDb)
+        static void VytvorUzivatele(Uzivatel_MM uzivatelDb)
         {
-            var uzivatel = new Uzivatel("Pepa", "Šmíd", 123456789, "smid@smid.cz", "sk_123456");
+            var uzivatel = new Uzivatel("Pepa", "Šmíd", "123456789", "smid@smid.cz", "sk_123456");
             uzivatelDb.Vloz(uzivatel);
-            uzivatel = new Uzivatel("Alena", "Šilerová", 234567891, "shilerka@shilerka.com", "sk_234567");
+            uzivatel = new Uzivatel("Alena", "Šilerová", "234567891", "shilerka@shilerka.com", "sk_234567");
             uzivatelDb.Vloz(uzivatel);
-            uzivatel = new Uzivatel("Martin", "Novák", 345678912, "novak@novak.cz", "sk_345678");
+            uzivatel = new Uzivatel("Martin", "Novák", "345678912", "novak@novak.cz", "sk_345678");
             uzivatelDb.Vloz(uzivatel);
-            uzivatel = new Uzivatel("Zuzana", "Čermochová", 456789123, "cermochova@cermochova.com", "sk_456789");
+            uzivatel = new Uzivatel("Zuzana", "Čermochová", "456789123", "cermochova@cermochova.com", "sk_456789");
             uzivatelDb.Vloz(uzivatel);
-            uzivatel = new Uzivatel("Ondřej", "Huml", 567891234, "huml@huml.cz", "sk_567891");
+            uzivatel = new Uzivatel("Ondřej", "Huml", "567891234", "huml@huml.cz", "sk_567891");
             uzivatelDb.Vloz(uzivatel);
         }
 
-        static void VytvorAk(AK_DB akDb, Kontakt_DB kontaktDb, Uzivatel_DB uzivatelDb, Poskytovatel_DB poskytovatelDb, Doplnky_DB doplnkyDb)
+        static void VytvorAk(AK_MM akDb, Kontakt_MM kontaktDb, Uzivatel_MM uzivatelDb, Poskytovatel_MM poskytovatelDb, Doplnky_MM doplnkyDb)
         {
             var uzivatele = new List<Uzivatel>();
             uzivatele.Add(uzivatelDb.Ziskej(1));
@@ -335,7 +214,7 @@ namespace PAIS
             akDb.Vloz(ak);
         }
 
-        static void VytvorPoskytovatele(Poskytovatel_DB poskytovatelDb)
+        static void VytvorPoskytovatele(Poskytovatel_MM poskytovatelDb)
         {
             var poskytovatel = new Poskytovatel(TypPoskytovatele.OpenAI, "cz_1a2b3c4d5e6f", "https://abc");
             poskytovatelDb.Vloz(poskytovatel);
@@ -343,7 +222,7 @@ namespace PAIS
             poskytovatelDb.Vloz(poskytovatel);
         }
 
-        static void VytvorDoplnky(Doplnky_DB doplnkyDb)
+        static void VytvorDoplnky(Doplnky_MM doplnkyDb)
         {
             var doplnky = new Doplnky(true, true, true, true, true);
             doplnkyDb.Vloz(doplnky);
@@ -353,5 +232,56 @@ namespace PAIS
             doplnkyDb.Vloz(doplnky);
 
         }
+
+        static void PridatKontakt(Kontakt_MM kontaktDb)
+        {
+            try
+            {
+                Console.WriteLine("Zadejte jméno:");
+                string jmeno = Console.ReadLine();
+
+                Console.WriteLine("Zadejte příjmení:");
+                string prijmeni = Console.ReadLine();
+
+                Console.WriteLine("Zadejte telefonní číslo:");
+                string telefonniCislo = Console.ReadLine();
+
+                Console.WriteLine("Zadejte email:");
+                string email = Console.ReadLine();
+
+
+                var kontakt = new Kontakt(jmeno, prijmeni, telefonniCislo, email);
+                kontaktDb.Vloz(kontakt);
+
+                Console.WriteLine($"Přidali jste nový kontakt: {kontakt.ToString()}");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Chyba: Telefonní číslo musí být ve správném formátu.");
+            }
+
+            VypisVsechnyKontakty(kontaktDb);
+        }
+
+        static void VypisVsechnyKontakty(Kontakt_MM kontaktDb)
+        {
+            var kontakty = kontaktDb.ZiskejVsechny();
+            Console.WriteLine("Seznam všech kontaktů:");
+            foreach (var kontakt in kontakty)
+            {
+                Console.WriteLine(kontakt.ToString());
+            }
+        }
+
+        static void SmazatKontakt(Kontakt_MM kontaktDb)
+        {
+            Console.WriteLine("Zadejte ID kontaktu, který chcete smazat:");
+            int id = int.Parse(Console.ReadLine());
+
+            kontaktDb.Smaz(id);
+
+            VypisVsechnyKontakty(kontaktDb);
+        }
+
     }
 }

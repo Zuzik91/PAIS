@@ -1,6 +1,6 @@
 ﻿namespace PAIS_CORE.Database
 {
-    internal interface IDb<T>
+    internal interface IMm<T>
     {
         void Vloz(T zaznam);
         void Smaz(T zaznam);

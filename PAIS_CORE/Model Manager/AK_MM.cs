@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PAIS_CORE.Database
 {
-    public class AK_DB : IDb<AK>
+    public class AK_MM : IMm<AK>
     {
         public static Dictionary<int, AK> db = new Dictionary<int, AK>();
         public static int posledniId = 1;
