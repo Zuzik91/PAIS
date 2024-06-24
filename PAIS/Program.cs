@@ -19,13 +19,17 @@ namespace PAIS
             VytvorDoplnky(doplnkyDb);
             VytvorAk(akDb, kontaktDb, uzivatelDb, poskytovatelDb, doplnkyDb);
 
-            //PŘIDÁNÍ KONTAKTU - Nutnost kontroly telefonního čísla + ohlídání opakování kontaktu
-            PridatKontakt(kontaktDb);
-            Console.WriteLine();
+            //PŘIDÁNÍ KONTAKTU
+            //PridatKontakt(kontaktDb);
+            //Console.WriteLine();
 
-            //SMAZÁNÍ KONTAKTU - Výpis seznamu bez smazaného kontaktu
-            SmazatKontakt(kontaktDb);
-            Console.WriteLine();
+            //SMAZÁNÍ KONTAKTU
+            //SmazatKontakt(kontaktDb);
+            //Console.WriteLine();
+
+            //VÝPIS VŠECH KONTAKTŮ
+            //VypisVsechnyKontakty(kontaktDb);
+            //Console.WriteLine();
 
 
             /*Console.WriteLine("Ahoj, jmenuji se P.Ai.S a jsem program spravující klienty využívající naše produkty Praetor AI.");
@@ -249,18 +253,23 @@ namespace PAIS
                 Console.WriteLine("Zadejte email:");
                 string email = Console.ReadLine();
 
+                if (kontaktDb.ExistujeKontakt(telefonniCislo, email))
+                {
+                    Console.WriteLine("Kontakt s tímto telefonním číslem nebo emailem již existuje.");
+                    return;
+                }
 
                 var kontakt = new Kontakt(jmeno, prijmeni, telefonniCislo, email);
                 kontaktDb.Vloz(kontakt);
 
                 Console.WriteLine($"Přidali jste nový kontakt: {kontakt.ToString()}");
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Chyba: Telefonní číslo musí být ve správném formátu.");
-            }
 
-            VypisVsechnyKontakty(kontaktDb);
+                VypisVsechnyKontakty(kontaktDb);
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Telefonní číslo musí obsahovat pouze čísla a mít délku 9 až 15 čísel!");
+            }
         }
 
         static void VypisVsechnyKontakty(Kontakt_MM kontaktDb)

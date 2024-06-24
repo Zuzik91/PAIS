@@ -32,15 +32,14 @@ namespace PAIS_CORE.Database
         }
 
         public void Smaz(int id)
-        {        
+        {
             if (db.ContainsKey(id))
             {
-                Console.WriteLine($"Kontakt s id {id} není v databázi.");
+                db.Remove(id);
             }
             else
             {
-                db.Remove(id);
-                Console.WriteLine($"Kontakt s id {id} byl smazán.");
+                Console.WriteLine($"Advokátní kancelář s id {id} není v databázi.");
             }
         }
 
@@ -72,7 +71,7 @@ namespace PAIS_CORE.Database
             return db.Count;
         }
 
-        static void PridatKontakt(Kontakt_MM kontaktDb)
+        void PridatKontakt()
         {
             Console.WriteLine("Zadejte jméno:");
             string jmeno = Console.ReadLine();
@@ -87,11 +86,21 @@ namespace PAIS_CORE.Database
             string email = Console.ReadLine();
 
             var kontakt = new Kontakt(jmeno, prijmeni, telefonniCislo, email);
-            kontaktDb.Vloz(kontakt);
+            Vloz(kontakt);
 
             Console.WriteLine($"Přidali jste nový kontakt: {kontakt.ToString()}");
         }
 
-        
+        public bool ExistujeKontakt(string telefonniCislo, string email)
+        {
+            foreach (var kontakt in db.Values)
+            {
+                if (kontakt.TelefonniCislo == telefonniCislo || kontakt.Mail == email)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

@@ -34,7 +34,14 @@ namespace PAIS_CORE.Database
 
         public void Smaz(int id)
         {
-            db.Remove(id);
+            if (db.ContainsKey(id))
+            {
+                db.Remove(id);
+            }
+            else
+            {
+                Console.WriteLine($"Advokátní kancelář s id {id} není v databázi.");
+            }
         }
         public void Aktualizuj(Doplnky doplnky)
         {

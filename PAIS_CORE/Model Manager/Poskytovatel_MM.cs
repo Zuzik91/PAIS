@@ -35,11 +35,11 @@ namespace PAIS_CORE.Database
         {
             if (db.ContainsKey(id))
             {
-                Console.WriteLine($"Poskytovatel s id {id} není v databázi.");
+                db.Remove(id);
             }
             else
             {
-                db.Remove(id);
+                Console.WriteLine($"Advokátní kancelář s id {id} není v databázi.");
             }
         }
         public void Aktualizuj(Poskytovatel poskytovatel)

@@ -9,11 +9,22 @@ namespace PAIS_CORE.Model
     public class Kontakt
     {
         //bazání třída
+        private string telefonniCislo;
         public int Id { get; set; }
         public string Jmeno { get; set; }
         public string Prijmeni { get; set; }
-
-        public string TelefonniCislo;
+        public string TelefonniCislo
+        {
+            get => telefonniCislo;
+            set
+            {
+                if (!IsValidTelefonniCislo(value))
+                {
+                    throw new ArgumentException("Telefonní číslo musí obsahovat pouze čísla a mít délku 9 až 15 čísel!");
+                }
+                telefonniCislo = value;
+            }
+        }
         public string Mail { get; set; }
         public List<Pravo> Prava { get; set; } = new List<Pravo>();
 
@@ -79,19 +90,6 @@ namespace PAIS_CORE.Model
         public override string ToString()
         {
             return $"{Id} - {Jmeno} {Prijmeni}: {TelefonniCislo}, {Mail}";
-        }
-
-        public string SpravnostTelefonnihoCisla
-        {
-            get => TelefonniCislo;
-            set
-            {
-                if (!IsValidTelefonniCislo(value))
-                    {
-                    throw new ArgumentException("Telefonní číslo musí obsahovat pouze čísla a mít délku 9 až 15 čísel!");
-                    }
-                TelefonniCislo = value;
-            }
         }
 
         private bool IsValidTelefonniCislo(string telefonniCislo)
