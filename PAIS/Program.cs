@@ -31,8 +31,10 @@ namespace PAIS
             //VypisVsechnyKontakty(kontaktDb);
             //Console.WriteLine();
 
+            //VÝPIS DOPLŇKŮ DANNÉ AK 
+            //VypisDoplnkyAK(akDb);
 
-            /*Console.WriteLine("Ahoj, jmenuji se P.Ai.S a jsem program spravující klienty využívající naše produkty Praetor AI.");
+            Console.WriteLine("Ahoj, jmenuji se P.Ai.S a jsem program spravující klienty využívající naše produkty Praetor AI.");
             Console.WriteLine($"Našimi doplňky jsou: Word AI, Outlook AI, Integrace, Analýza a Anonymizace.");
             Console.WriteLine();
 
@@ -50,131 +52,228 @@ namespace PAIS
                 switch (volba)
                 {
                     case "1": //Práce s advokátní kanceláří
-                        while (true)
-                        {
-                            Console.WriteLine("Volba 1.1 Přidání noví advokátní kanceláře.");
-                            Console.WriteLine("Volba 2. ");
-                            Console.WriteLine("Volba 3. ");
-                            Console.WriteLine("Volba 4. ");
-                            Console.WriteLine("Volba 5. ");
-                            Console.WriteLine("Volba 6. ");
-                            Console.WriteLine("Volba 7. Počet advokátních kanceláří");
-                            Console.WriteLine("Volba Q. Ukončit");
-
-                            switch (volba)
-                            {
-                                case "1":
-                                    Console.WriteLine($"Přidali jste nový záznam: ");
-                                    Console.WriteLine($"1");
-                                    return;
-
-                                case "2":
-                                    Console.WriteLine($"2");
-                                    Console.WriteLine();
-                                    return;
-
-                                case "3":
-                                    Console.WriteLine($"3");
-                                    Console.WriteLine();
-                                    return;
-
-                                case "4":
-                                    Console.WriteLine($"4");
-                                    Console.WriteLine();
-                                    return;
-
-                                case "5":
-                                    Console.WriteLine($"5");
-                                    Console.WriteLine();
-                                    return;
-
-                                case "6":
-                                    Console.WriteLine($"6");
-                                    Console.WriteLine();
-                                    return;
-
-                                case "7": //Počet advokátních kanceláří
-                                    Console.WriteLine($"Počet advokátních kanceláří je {akDb.PocetZaznamu()}");
-                                    Console.WriteLine();
-                                    return;
-
-                                case "Q":
-                                    Console.WriteLine();
-                                    break;
-
-                                default:
-                                    Console.WriteLine();
-                                    return;
-                            }
-
-                        }
+                        PracujAdvokatniKancelar(akDb);
+                        break;
 
                     case "2": //Práce s uživateli
+                        PracujUzivateli(uzivatelDb);
                         break;
 
                     case "3": //Práce s kontakty
-                        Console.WriteLine("Volba 3.1 Přidání nového kontaktu.");
-                        Console.WriteLine("Volba 3.2 ");
-                        Console.WriteLine("Volba 3.3 ");
-                        Console.WriteLine("Volba 3.4 ");
-                        Console.WriteLine("Volba 3.5 ");
-                        Console.WriteLine("Volba 3.6 ");
-                        Console.WriteLine("Volba 3.7 Počet kontaktů (celkem).");
-                        Console.WriteLine("Volba Q. Ukončit");
-
-                        switch (volba)
-                        {
-                            case "3.1":
-                                PridatKontakt(kontaktDb);
-                                Console.WriteLine();
-                                return;
-
-                            case "3.2":
-                                Console.WriteLine($"2");
-                                Console.WriteLine("Zadali jste špatný údaj");
-                                return;
-
-                            case "3.3":
-                                Console.WriteLine($"3");
-                                Console.WriteLine();
-                                return;
-
-                            case "3.4":
-                                Console.WriteLine($"4");
-                                Console.WriteLine();
-                                return;
-
-                            case "3.5":
-                                Console.WriteLine($"5");
-                                Console.WriteLine();
-                                return;
-
-                            case "3.6":
-                                Console.WriteLine($"6");
-                                Console.WriteLine();
-                                return;
-
-                            case "3.7": //Počet kontaktů (celkem)
-                                Console.WriteLine($"Počet kontaktů celkem je {akDb.PocetZaznamu()}");
-                                Console.WriteLine();
-                                return;
-
-                            case "Q":
-                                Console.WriteLine();
-                                break;
-                        }
+                        PracujKontaky(kontaktDb);
                         break;
+
+                    case "4": //Práce s poskytovateli
+                        PracujPoskytovateli(poskytovatelDb);
+                        break;
+
+                    case "5": //Práce s doplňky
+                        PracujDoplnky(doplnkyDb);
+                        break;
+
+                    case "Q":
+                        return;
+                        
+                    default:
+                        Console.WriteLine("Zadali jste špatný symbol");
+                        Console.WriteLine();
+                        break;
+                }
+            }
+        }
+
+        private static void PracujDoplnky(Doplnky_MM doplnkyDb)
+        {
+            while (true)
+            {
+                Console.WriteLine("Volba 5.1 Výpis všech doplňků");
+                Console.WriteLine("Volba Q. Ukončit");
+                string volba = Console.ReadLine().ToUpper();
+                Console.WriteLine();
+
+                switch (volba)
+                {
+                    case "5.1":
+                        VypisVsechnyDoplnky(doplnkyDb);
+                        Console.WriteLine();
+                        break;
+
+                    case "Q":
+                        Console.WriteLine();
+                        return;
+                }
+            }
+        }
+
+        private static void PracujPoskytovateli(Poskytovatel_MM poskytovatelDb)
+        {
+            while (true)
+            {
+                Console.WriteLine("Volba 4.1 Výpis všech poskytovatelů");
+                Console.WriteLine("Volba 4.2 Počet poskytovatelů (celkem).");
+                Console.WriteLine("Volba Q. Ukončit");
+                string volba = Console.ReadLine().ToUpper();
+
+                switch (volba)
+                {
+                    case "4.1":
+                        VypisVsechnyPoskytovatele(poskytovatelDb);
+                        Console.WriteLine();
+                        break;
+
+                    case "4.2":
+                        Console.WriteLine($"Počet kontaktů celkem je {poskytovatelDb.PocetZaznamu()}");
+                        Console.WriteLine();
+                        break;
+
+                    case "Q":
+                        Console.WriteLine();
+                        return;
+                }
+            }
+        }
+
+        private static void PracujKontaky(Kontakt_MM kontaktDb)
+        {
+            while (true)
+            {
+                Console.WriteLine("Volba 3.1 Přidání nového kontaktu.");
+                Console.WriteLine("Volba 3.2 Smazání kontaktu.");
+                Console.WriteLine("Volba 3.3 Výpis všech kontaktů");
+                Console.WriteLine("Volba 3.4 Počet kontaktů (celkem).");
+                Console.WriteLine("Volba Q. Ukončit");
+                string volba = Console.ReadLine().ToUpper();
+
+                switch (volba)
+                {
+                    case "3.1":
+                        PridatKontakt(kontaktDb);
+                        Console.WriteLine();
+                        break;
+
+                    case "3.2":
+                        SmazatKontakt(kontaktDb);
+                        Console.WriteLine();
+                        break;
+
+                    case "3.3":
+                        VypisVsechnyKontakty(kontaktDb);
+                        Console.WriteLine();
+                        break;
+
+                    case "3.4": //Počet kontaktů (celkem)
+                        Console.WriteLine($"Počet kontaktů celkem je {kontaktDb.PocetZaznamu()}");
+                        Console.WriteLine();
+                        break;
+
+                    case "Q":
+                        Console.WriteLine();
+                        return;
+                }
+            }
+        }
+
+        private static void PracujUzivateli(Uzivatel_MM uzivatelDb)
+        {
+            while (true)
+            {
+                Console.WriteLine("Volba 3.1 Přidání nového uzivatele.");
+                Console.WriteLine("Volba 3.2 Smazání uzivatele.");
+                Console.WriteLine("Volba 3.3 Výpis všech uživatelů");
+                Console.WriteLine("Volba 3.4 Počet uživatelů (celkem).");
+                Console.WriteLine("Volba Q. Ukončit");
+                string volba = Console.ReadLine().ToUpper();
+
+                switch (volba)
+                {
+                    case "3.1":
+                        PridatKontakt(uzivatelDb);
+                        Console.WriteLine();
+                        break;
+
+                    case "3.2":
+                        SmazatKontakt(uzivatelDb);
+                        Console.WriteLine();
+                        break;
+
+                    case "3.3":
+                        VypisVsechnyKontakty(uzivatelDb);
+                        Console.WriteLine();
+                        break;
+
+                    case "3.4": //Počet kontaktů (celkem)
+                        Console.WriteLine($"Počet kontaktů celkem je {uzivatelDb.PocetZaznamu()}");
+                        Console.WriteLine();
+                        break;
+
+                    case "Q":
+                        Console.WriteLine();
+                        return;
+                }
+            }
+        }
+
+        private static void PracujAdvokatniKancelar(AK_MM akDb)
+        {
+            while (true)
+            {
+                Console.WriteLine("Volba 1.1 Přidání noví advokátní kanceláře.");
+                Console.WriteLine("Volba 2. ");
+                Console.WriteLine("Volba 3. ");
+                Console.WriteLine("Volba 4. ");
+                Console.WriteLine("Volba 5. ");
+                Console.WriteLine("Volba 6. ");
+                Console.WriteLine("Volba 7. Počet advokátních kanceláří");
+                Console.WriteLine("Volba Q. Ukončit");
+                var volba = Console.ReadLine().ToUpper();
+
+                switch (volba)
+                {
+                    case "1":
+                        Console.WriteLine($"Přidali jste nový záznam: ");
+                        Console.WriteLine($"1");
+                        return;
+
+                    case "2":
+                        Console.WriteLine($"2");
+                        Console.WriteLine();
+                        return;
+
+                    case "3":
+                        Console.WriteLine($"3");
+                        Console.WriteLine();
+                        return;
+
+                    case "4":
+                        Console.WriteLine($"4");
+                        Console.WriteLine();
+                        return;
+
+                    case "5":
+                        Console.WriteLine($"5");
+                        Console.WriteLine();
+                        return;
+
+                    case "6":
+                        Console.WriteLine($"6");
+                        Console.WriteLine();
+                        return;
+
+                    case "7": //Počet advokátních kanceláří
+                        Console.WriteLine($"Počet advokátních kanceláří je {akDb.PocetZaznamu()}");
+                        Console.WriteLine();
+                        return;
 
                     case "Q":
                         Console.WriteLine();
                         break;
 
                     default:
-                        Console.WriteLine("Zadali jste špatný symbol");
                         Console.WriteLine();
-                        break;
+                        return;
                 }
-            }*/
+
+            }
         }
 
         static void VytvorKontakty(Kontakt_MM kontaktDb)
@@ -215,6 +314,8 @@ namespace PAIS
             poskytovatele.Add(poskytovatelDb.Ziskej(1));
 
             var ak = new AK("AK Smid", kontaktDb.Ziskej(1), uzivatele, poskytovatele, doplnkyDb.Ziskej(1), "paojfohwe", "wfiagffi", "smid");
+            akDb.Vloz(ak);
+            ak = new AK("AK Novák", kontaktDb.Ziskej(1), uzivatele, poskytovatele, doplnkyDb.Ziskej(1), "wefqwf", "tjuetj", "novak");
             akDb.Vloz(ak);
         }
 
@@ -291,6 +392,50 @@ namespace PAIS
 
             VypisVsechnyKontakty(kontaktDb);
         }
+        static void VypisDoplnkyAK(AK_MM akDb)
+        {
+            Console.WriteLine("Napiš název advokátní kanceláře:");
+            string nazevAk = Console.ReadLine();
 
+            if (akDb.ExistujeAk(nazevAk))
+            {
+                var ak = akDb.ZiskejVsechny();
+                foreach (var a in ak)
+                {
+                    if (a.NazevAk == nazevAk)
+                    {
+                        var doplnky = a.Doplnky;
+                        Console.WriteLine($"{a.NazevAk} má následující doplňky: {doplnky.ToString()}");
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Advokátní kancelář s názvem {nazevAk} neexistuje.");
+            }
+        }
+
+        static void VypisVsechnyDoplnky(Doplnky_MM doplnkyDb)
+        {
+            var doplnky = doplnkyDb.ZiskejVsechny();
+            Console.WriteLine("Seznam všech doplňků:");
+            foreach (var doplnek in doplnky)
+            {
+                Console.WriteLine(doplnek.ToString());
+                break;
+            }
+        }
+
+        static void VypisVsechnyPoskytovatele(Poskytovatel_MM poskytovatelDb)
+        {
+            var poskytovatel = poskytovatelDb.ZiskejVsechny();
+            Console.WriteLine("Seznam všech poskytovatelů:");
+            foreach (var poskytovatele in poskytovatel)
+            {
+                Console.WriteLine(poskytovatele.ToString());
+                break;
+            }
+        }
     }
 }

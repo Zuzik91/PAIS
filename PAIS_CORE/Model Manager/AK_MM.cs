@@ -68,5 +68,16 @@ namespace PAIS_CORE.Database
         {
             return db.Count;
         }
+        public bool ExistujeAk(string nazevAk)
+        {
+            foreach (var ak in db.Values)
+            {
+                if (ak.NazevAk == nazevAk)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

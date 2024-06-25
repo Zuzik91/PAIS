@@ -36,5 +36,16 @@ namespace PAIS_CORE.Model
             Analyza = analyza;
             Anonymizace = anonymizace;
         }
+
+        public override string ToString()
+        {
+            List<string> doplnky = new List<string>();
+            if (WordAI) doplnky.Add("WordAI");
+            if (OutlookAI) doplnky.Add("OutlookAI");
+            if (IntegraceAI) doplnky.Add("IntegraceAI");
+            if (Analyza) doplnky.Add("Analyza");
+            if (Anonymizace) doplnky.Add("Anonymizace");
+            return string.Join(", ", doplnky);
+        }
     }
 }
