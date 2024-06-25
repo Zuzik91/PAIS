@@ -88,6 +88,7 @@ namespace PAIS
             {
                 Console.WriteLine("Volba 5.1 Výpis všech doplňků");
                 Console.WriteLine("Volba Q. Ukončit");
+                Console.WriteLine();
                 string volba = Console.ReadLine().ToUpper();
                 Console.WriteLine();
 
@@ -112,6 +113,7 @@ namespace PAIS
                 Console.WriteLine("Volba 4.1 Výpis všech poskytovatelů");
                 Console.WriteLine("Volba 4.2 Počet poskytovatelů (celkem)");
                 Console.WriteLine("Volba Q. Ukončit");
+                Console.WriteLine();
                 string volba = Console.ReadLine().ToUpper();
 
                 switch (volba)
@@ -122,7 +124,7 @@ namespace PAIS
                         break;
 
                     case "4.2":
-                        Console.WriteLine($"Počet kontaktů celkem je {poskytovatelDb.PocetZaznamu()}.");
+                        Console.WriteLine($"Počet poskytovatelů celkem je {poskytovatelDb.PocetZaznamu()}.");
                         Console.WriteLine();
                         break;
 
@@ -142,6 +144,7 @@ namespace PAIS
                 Console.WriteLine("Volba 3.3 Výpis všech kontaktů");
                 Console.WriteLine("Volba 3.4 Počet kontaktů (celkem)");
                 Console.WriteLine("Volba Q. Ukončit");
+                Console.WriteLine();
                 string volba = Console.ReadLine().ToUpper();
 
                 switch (volba)
@@ -182,6 +185,7 @@ namespace PAIS
                 Console.WriteLine("Volba 2.3 Výpis všech uživatelů");
                 Console.WriteLine("Volba 2.4 Počet uživatelů (celkem)");
                 Console.WriteLine("Volba Q. Ukončit");
+                Console.WriteLine();
                 string volba = Console.ReadLine().ToUpper();
 
                 switch (volba)
@@ -223,6 +227,7 @@ namespace PAIS
                 Console.WriteLine("Volba 1.4 Počet advokátních kanceláří");
                 Console.WriteLine("Volba 1.5 Vypiš doplňky u konkrétní advokátní kanceláře");
                 Console.WriteLine("Volba Q. Ukončit");
+                Console.WriteLine();
                 string volba = Console.ReadLine().ToUpper();
 
                 switch (volba)
@@ -297,9 +302,9 @@ namespace PAIS
             var poskytovatele = new List<Poskytovatel>();
             poskytovatele.Add(poskytovatelDb.Ziskej(1));
 
-            var ak = new AK("AK Smid", kontaktDb.Ziskej(1), uzivatele, poskytovatele, doplnkyDb.Ziskej(1), "paojfohwe", "wfiagffi", "smid");
+            var ak = new AK("AK Smid", kontaktDb.Ziskej(1), uzivatele, poskytovatele, doplnkyDb.Ziskej(1), "https://xyz", "https://ai.praetor.app/x", "smid");
             akDb.Vloz(ak);
-            ak = new AK("AK Novák", kontaktDb.Ziskej(1), uzivatele, poskytovatele, doplnkyDb.Ziskej(1), "wefqwf", "tjuetj", "novak");
+            ak = new AK("AK Novák", kontaktDb.Ziskej(1), uzivatele, poskytovatele, doplnkyDb.Ziskej(1), "https://efg", "https://ai.praetor.app/e", "novak");
             akDb.Vloz(ak);
         }
 
@@ -379,10 +384,6 @@ namespace PAIS
 
         static void VypisDoplnkyAK(AK_MM akDb)
         {
-            //Console.WriteLine("Napiš název advokátní kanceláře:");
-            //string nazevAk = Console.ReadLine();
-
-            // Název serveru je unikátní pro každou kancelář
             Console.WriteLine("Napiš název serveru advokátní kanceláře:");
             string nazevServeru = Console.ReadLine();
 
@@ -423,7 +424,6 @@ namespace PAIS
             foreach (var poskytovatele in poskytovatel)
             {
                 Console.WriteLine(poskytovatele.ToString());
-                break;
             }
         }
 
@@ -472,7 +472,6 @@ namespace PAIS
             foreach (var uzivatele in uzivatel)
             {
                 Console.WriteLine(uzivatele.ToString());
-                break;
             }
         }
 

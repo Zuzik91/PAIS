@@ -10,9 +10,9 @@ namespace PAIS_CORE.Database
 {
     public class Doplnky_MM : IMm<Doplnky>
     {
-        public static Dictionary<int, Doplnky> db = new Dictionary<int, Doplnky>();
+        private static Dictionary<int, Doplnky> db = new Dictionary<int, Doplnky>();
         
-        public static int posledniId = 1;
+        private static int posledniId = 1;
 
         public void Vloz(Doplnky doplnky)
         {
