@@ -68,11 +68,11 @@ namespace PAIS_CORE.Database
         {
             return db.Count;
         }
-        public bool ExistujeAk(string nazevAk)
+        public bool ExistujeAk(string nazevAk, string nazevServeru)
         {
             foreach (var ak in db.Values)
             {
-                if (ak.NazevAk == nazevAk)
+                if (ak.NazevAk == nazevAk || ak.NazevServeru == nazevServeru)
                 {
                     return true;
                 }

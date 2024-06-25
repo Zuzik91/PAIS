@@ -51,5 +51,10 @@ namespace PAIS_CORE.Model
             PraetorAiService = praetorAiService;
             NazevServeru = nazevServeru;
         }
+
+        public override string ToString()
+        {
+            return $"{Id} - {NazevAk}";
+        }
     }
 }

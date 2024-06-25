@@ -95,5 +95,17 @@ namespace PAIS_CORE.Database
             var abc = db.Count;
             return abc;
         }
+
+        public bool ExistujeUzivatel(string apiTokenUzivatele)
+        {
+            foreach (var uzivatel in db.Values)
+            {
+                if (uzivatel.ApiTokenUzivatele == apiTokenUzivatele)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

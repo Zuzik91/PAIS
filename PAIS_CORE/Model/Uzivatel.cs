@@ -24,7 +24,7 @@ namespace PAIS_CORE.Model
 
         public override string ToString()
         {
-            return $"Uzivatel: {Id} - {Jmeno} {Prijmeni}: {TelefonniCislo}, {Mail} - {ApiTokenUzivatele}";
+            return $"Uživatel: {Id} - {Jmeno} {Prijmeni}: {TelefonniCislo}, {Mail} - {ApiTokenUzivatele}";
         }
     }
 }
