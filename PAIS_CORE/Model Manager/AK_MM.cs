@@ -9,8 +9,8 @@ namespace PAIS_CORE.Database
 {
     public class AK_MM : IMm<AK>
     {
-        public static Dictionary<int, AK> db = new Dictionary<int, AK>();
-        public static int posledniId = 1;
+        private static Dictionary<int, AK> db = new Dictionary<int, AK>();
+        private static int posledniId = 1;
 
         public void Vloz(AK ak)
         {
@@ -68,11 +68,12 @@ namespace PAIS_CORE.Database
         {
             return db.Count;
         }
-        public bool ExistujeAk(string nazevAk, string nazevServeru)
+        
+        public bool ExistujeAk(string nazevServeru)
         {
             foreach (var ak in db.Values)
             {
-                if (ak.NazevAk == nazevAk || ak.NazevServeru == nazevServeru)
+                if (ak.NazevServeru == nazevServeru)
                 {
                     return true;
                 }
