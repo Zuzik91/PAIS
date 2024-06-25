@@ -47,7 +47,7 @@ namespace PAIS_CORE.Database
             }
             else
             {
-                Console.WriteLine($"Advokátní kancelář s id {id} není v databázi.");
+                Console.WriteLine($"Uživatel s id {id} není v databázi.");
             }
         }
 

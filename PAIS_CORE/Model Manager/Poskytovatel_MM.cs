@@ -39,7 +39,7 @@ namespace PAIS_CORE.Database
             }
             else
             {
-                Console.WriteLine($"Advokátní kancelář s id {id} není v databázi.");
+                Console.WriteLine($"Poskytovatel s id {id} není v databázi.");
             }
         }
         public void Aktualizuj(Poskytovatel poskytovatel)
